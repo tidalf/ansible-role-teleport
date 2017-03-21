@@ -1,12 +1,10 @@
 teleport:
-  nodename: {{ teleport_nodename }}
+  nodename: {{ ansible_hostname }}
   pid_file: {{ teleport_pidfile }}
 {% if teleport_auth_token %}  
   auth_token: {{ teleport_auth_token }}
 {% endif %}
-{% if teleport_advertise_ip | default(false) %}
-  advertise_ip: {{ teleport_advertise_ip }}
-{% endif %}
+  advertise_ip: {{ ansible_default_ipv4.address }}
   auth_servers:
 {% for auth_server in teleport_auth_servers %}
     - {{ auth_server }}
@@ -51,6 +49,14 @@ ssh_service:
 {% if teleport_ssh_enabled | default(false) %}
   enabled: "yes"
   listen_addr: {{ teleport_ssh_listen_address }}
+  namespace: default
+  commands: 
+  - name: hostname
+    command: [/bin/hostname]
+    period: 1m0s
+  - name: type
+    command: [/bin/echo, {{ teleport_node_type }} ] 
+    period: 1m0s
 {% else %}
   enabled: "no"
 {% endif %}

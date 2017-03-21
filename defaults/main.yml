@@ -1,5 +1,5 @@
 ---
-teleport_version: "1.0.4"
+teleport_version: "2.0.0-alpha.7"
 teleport_ssl_cert_path: "/etc/teleport"
 teleport_config_path: "/etc/teleport.yaml"
 teleport_nodename: 'teleport'
@@ -7,7 +7,6 @@ teleport_auth_token: ''
 teleport_auth_servers:
   - 127.0.0.1:3025
 teleport_data_dir: '/var/lib/teleport'
-
 teleport_log_level: 'WARN'
 teleport_storage_type: 'bolt'
 teleport_pidfile: '/var/run/teleport.pid'
@@ -25,7 +24,6 @@ teleport_auth_oidc_connectors: []
 # ssh service
 teleport_ssh_enabled: true
 teleport_ssh_listen_address: '0.0.0.0:3022'
-teleport_commands: []
 
 # proxy service
 teleport_proxy_enabled: true
